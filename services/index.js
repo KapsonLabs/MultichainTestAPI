@@ -14,6 +14,16 @@ async function getNodeInfo() {
     }
   }
 
+  async function getAddresses() {
+    try {
+      return await multichain.listAddresses();
+    } catch (err) {
+    //   throw createError('Could not get info about node', { err });
+        console.log('Could not get addresses from the node', {err})
+    }
+  }
+
 module.exports = {
-    getNodeInfo
+    getNodeInfo,
+    getAddresses
 };
