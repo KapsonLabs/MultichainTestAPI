@@ -1,6 +1,7 @@
 'use strict';
+const chain_instance = require('./multichain')
 
-const createError = require('../util/create-error');
+// const createError = require('../util/create-error');
 
 /**
  * List all data streams in the blockchain
@@ -8,11 +9,12 @@ const createError = require('../util/create-error');
  * @param app
  * @return {Promise<*>}
  */
-async function listStreams(app) {
+async function listStreams() {
   try {
-    return await app.multichain.listStreams();
+    await chain_instance.listStreams();
   } catch (err) {
-    throw createError('Could not list streams', { err });
+    console.log('Unable to list streams')
+    return err
   }
 }
 
@@ -24,9 +26,9 @@ async function listStreams(app) {
  * @param {number}  itemsCount  The number of records to return
  * @return {Promise<{count: number, data: Array}>}
  */
-async function listStreamItems(app, stream, itemsCount) {
+async function listStreamItems(stream, itemsCount) {
   try {
-    const rawData = await app.multichain.listStreamItems({ stream, count: itemsCount || 9999 });
+    const rawData = await chain_instance.listStreamItems({ stream, count: itemsCount || 9999 });
     const data = [];
 
     /*
@@ -50,11 +52,12 @@ async function listStreamItems(app, stream, itemsCount) {
  * @param {string}  name  The name for the new stream
  * @return {Promise<void>}
  */
-async function createNewStream(app, name) {
+async function createNewStream(name) {
   try {
-    return await app.multichain.create({ type: 'stream', name, open: true });
+    return await chain_instance.create({ type: 'stream', name, open: true });
   } catch (err) {
-    throw createError('Could not create a new stream', { err });
+    console.log('Unable to create streams')
+    return err
   }
 }
 

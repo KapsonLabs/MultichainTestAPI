@@ -7,7 +7,7 @@ const cors = require('cors');
 // const logger = require('./util/logger');
 
 const indexRouter = require('./routes/index');
-// const streamRouter = require('./routes/stream');
+const streamRouter = require('./routes/stream');
 // const multichainService = require('./services/multichain');
 
 const app = express();
@@ -22,7 +22,7 @@ app
    * Routes
    */
   .use('/', indexRouter)
-//   .use('/stream', streamRouter)
+  .use('/stream', streamRouter)
   /*
    * Error handler
    */
@@ -35,7 +35,7 @@ app
 /*
  * Start the service
  */
-app.listen(port, async () => {
+app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 
 //   await multichainService.init(app);

@@ -1,13 +1,9 @@
-let multichain = require("multichain-node")({
-    port: 7760,
-    host: '127.0.0.1',
-    user: 'multichainrpc',
-    pass: 'Fo8qqwecNucQePbZuDwrwcxybVDU7RrVHgxKj3SVDCXN'
-});
+'use strict';
+const chain_instance = require('./multichain')
 
 async function getNodeInfo() {
     try {
-      return await multichain.getInfo();
+      return await chain_instance.getInfo();
     } catch (err) {
     //   throw createError('Could not get info about node', { err });
         console.log('Could not get info about the node', {err})
@@ -16,7 +12,7 @@ async function getNodeInfo() {
 
   async function getAddresses() {
     try {
-      return await multichain.listAddresses();
+      return await chain_instance.listAddresses();
     } catch (err) {
     //   throw createError('Could not get info about node', { err });
         console.log('Could not get addresses from the node', {err})
