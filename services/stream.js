@@ -11,7 +11,7 @@ const chain_instance = require('./multichain')
  */
 async function listStreams() {
   try {
-    await chain_instance.listStreams();
+    return await chain_instance.listStreams();
   } catch (err) {
     console.log('Unable to list streams')
     return err
@@ -41,7 +41,8 @@ async function listStreamItems(stream, itemsCount) {
 
     return { count: data.length, data };
   } catch (err) {
-    throw createError('Could not list stream items', { err });
+    console.log(err)
+    return err
   }
 }
 
@@ -68,11 +69,12 @@ async function createNewStream(name) {
  * @param {string}  stream  The name of the stream to subscribe to
  * @return {Promise<PushSubscription>}
  */
-async function subscribeToStream(app, stream) {
+async function subscribeToStream(stream) {
   try {
-    return await app.multichain.subscribe({ stream });
+    return await chain_instance.subscribe({ stream });
   } catch (err) {
-    throw createError('Could not subscribe to a stream', { err });
+    console.log('Unable to subscribe to stream')
+    return err
   }
 }
 
@@ -84,15 +86,16 @@ async function subscribeToStream(app, stream) {
  * @param {object|string|number}  inputData The data to be written. Can be text, number or JSON
  * @return {Promise<void>}
  */
-async function publishDataToStream(app, stream, inputData) {
+async function publishDataToStream(stream, inputData) {
   const currentTimestamp = Math.floor(Date.now() / 1000);
   const key = currentTimestamp.toString();
   const data = strToHex(JSON.stringify(inputData));
 
   try {
-    return await app.multichain.publish({ stream, key, data });
+    return await chain_instance.publish({ stream, key, data });
   } catch (err) {
-    throw createError('Could not publish data to the stream', { err });
+    console.log(err)
+    return err
   }
 }
 
