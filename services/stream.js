@@ -1,14 +1,7 @@
 'use strict';
 const chain_instance = require('./multichain')
 
-// const createError = require('../util/create-error');
 
-/**
- * List all data streams in the blockchain
- *
- * @param app
- * @return {Promise<*>}
- */
 async function listStreams() {
   try {
     return await chain_instance.listStreams();
@@ -18,14 +11,6 @@ async function listStreams() {
   }
 }
 
-/**
- * List the items (records) in a certain stream
- *
- * @param app
- * @param {string}  stream      The name of the stream for which to list the records
- * @param {number}  itemsCount  The number of records to return
- * @return {Promise<{count: number, data: Array}>}
- */
 async function listStreamItems(stream, itemsCount) {
   try {
     const rawData = await chain_instance.listStreamItems({ stream, count: itemsCount || 9999 });
@@ -46,13 +31,7 @@ async function listStreamItems(stream, itemsCount) {
   }
 }
 
-/**
- * Creates a new data stream
- *
- * @param app
- * @param {string}  name  The name for the new stream
- * @return {Promise<void>}
- */
+
 async function createNewStream(name) {
   try {
     return await chain_instance.create({ type: 'stream', name, open: true });
@@ -62,13 +41,7 @@ async function createNewStream(name) {
   }
 }
 
-/**
- * Subscribe the client to a certain data stream
- *
- * @param app
- * @param {string}  stream  The name of the stream to subscribe to
- * @return {Promise<PushSubscription>}
- */
+
 async function subscribeToStream(stream) {
   try {
     return await chain_instance.subscribe({ stream });

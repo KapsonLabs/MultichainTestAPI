@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const streamRouter = require('./routes/stream');
+const addressRouter = require('./routes/addresses');
 // const multichainService = require('./services/multichain');
 
 const app = express();
@@ -23,6 +24,7 @@ app
    */
   .use('/', indexRouter)
   .use('/stream', streamRouter)
+  .use('/address', addressRouter)
   /*
    * Error handler
    */

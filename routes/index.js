@@ -13,13 +13,5 @@ router.get('/info', async (req, res, next) => {
   }
 });
 
-router.get('/addresses', async (req, res, next) => {
-    try {
-      res.json(await indexService.getAddresses());
-    } catch (err) {
-      res.status(500);
-      return next(err);
-    }
-  });
 
 module.exports = router;
