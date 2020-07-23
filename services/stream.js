@@ -21,10 +21,11 @@ async function listStreamItems(stream, itemsCount) {
      * to JSON.
      */
     for (const row of rawData) {
-      data.push(JSON.parse(hexToStr(row.data)));
+      data.push({"info":JSON.parse(hexToStr(row.data)), "tx_id":row.txid});
     }
 
-    return { count: data.length, data };
+
+    return { count: data.length/2, data };
   } catch (err) {
     console.log(err)
     return err

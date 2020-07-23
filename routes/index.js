@@ -13,5 +13,14 @@ router.get('/info', async (req, res, next) => {
   }
 });
 
+router.get('/params', async (req, res, next) => {
+  try {
+    res.json(await indexService.getBlockchainParameters());
+  } catch (err) {
+    res.status(500);
+    return next(err);
+  }
+});
+
 
 module.exports = router;

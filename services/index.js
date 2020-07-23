@@ -10,7 +10,16 @@ async function getNodeInfo() {
     }
   }
 
+async function getBlockchainParameters() {
+  try {
+    return await chain_instance.getBlockchainParams();
+  } catch (err){
+    return err
+  }
+}
+
 
 module.exports = {
     getNodeInfo,
+    getBlockchainParameters
 };
