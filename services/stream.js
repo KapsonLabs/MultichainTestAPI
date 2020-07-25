@@ -25,7 +25,7 @@ async function listStreamItems(stream, itemsCount) {
     }
 
 
-    return { count: data.length/2, data };
+    return { count: data.length, data };
   } catch (err) {
     console.log(err)
     return err
