@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const streamRouter = require('./routes/stream');
 const addressRouter = require('./routes/addresses');
 const assetRouter = require('./routes/assets');
+const leaderBoardRouter = require('./routes/leaderboard');
 // const multichainService = require('./services/multichain');
 
 const app = express();
@@ -27,6 +28,7 @@ app
   .use('/stream', streamRouter)
   .use('/address', addressRouter)
   .use('/asset', assetRouter)
+  .use('/leaderboard', leaderBoardRouter)
   /*
    * Error handler
    */
