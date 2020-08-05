@@ -55,7 +55,7 @@ const Static = () => {
       "id": 1,
       "name":"Nana",
       "address":"1k8GnYot5RJPzMMZjvQXKioYAw7YtGksctw75",
-      "score":"5"
+      "score":"75"
     },
     {
       "id": 2,
