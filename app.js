@@ -29,18 +29,8 @@ app
   .use('/address', addressRouter)
   .use('/asset', assetRouter)
   .use('/leaderboard', leaderBoardRouter)
-  /*
-   * Error handler
-   */
-//   .use(errorHandler);
 
-// const log = logger(app);
-// app.log = log;
-// global.log = log;
-
-/*
- * Start the service
- */
+  
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 
