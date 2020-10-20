@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const authModels = require('./models/authmodels');
 
 // const errorHandler = require('./util/catch-and-log-errors');
 // const logger = require('./util/logger');
@@ -11,6 +12,7 @@ const streamRouter = require('./routes/stream');
 const addressRouter = require('./routes/addresses');
 const assetRouter = require('./routes/assets');
 const leaderBoardRouter = require('./routes/leaderboard');
+const authRouter        = require('./routes/auth');
 // const multichainService = require('./services/multichain');
 
 const app = express();
@@ -29,8 +31,9 @@ app
   .use('/address', addressRouter)
   .use('/asset', assetRouter)
   .use('/leaderboard', leaderBoardRouter)
+  .use('/auth', authRouter)
 
-  
+// authModels.User.sync({force: true})
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 
