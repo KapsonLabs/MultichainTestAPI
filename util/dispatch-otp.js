@@ -10,7 +10,7 @@ const client = require('twilio')(accountSid, authToken);
 const dispatchOtp = (phoneNumber, otp) => {
     client.messages
     .create({
-       body: '<#> Your verification code is' +otp+ 'ME0vB+RpcZz',
+       body: '<#> Your verification code is' +otp+ 'RIWGK2Y/1vW',
        from: '+19706993993',
        to: phoneNumber
      })

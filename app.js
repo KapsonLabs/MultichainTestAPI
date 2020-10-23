@@ -13,6 +13,7 @@ const addressRouter = require('./routes/addresses');
 const assetRouter = require('./routes/assets');
 const leaderBoardRouter = require('./routes/leaderboard');
 const authRouter        = require('./routes/auth');
+const surveillanceRouter = require('./routes/surveillance');
 // const multichainService = require('./services/multichain');
 
 const app = express();
@@ -32,6 +33,7 @@ app
   .use('/asset', assetRouter)
   .use('/leaderboard', leaderBoardRouter)
   .use('/auth', authRouter)
+  .use('/surveillance', surveillanceRouter)
 
 // authModels.User.sync({force: true})
 app.listen(port, () => {

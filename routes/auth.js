@@ -2,7 +2,6 @@ const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const authController = require("../services/auth");
-const auth = require('../services/auth');
 
 
 router.post("/users", (req, res, next) => {
