@@ -30,7 +30,10 @@ const authenticateSchool = async (request, response) => {
       })
     }
   } catch (err) {
-    console.log(err.stack)
+    return response.json({
+      "status":500,
+      "message":"Internal Server Error"
+    })
   }
 }
 
@@ -48,7 +51,10 @@ const createSchool = async (request, response) => {
         })
         
       } catch (err) {
-        console.log(err.stack)
+        return response.json({
+          "status":500,
+          "message":"Internal Server Error"
+        })
       }
 }
 
@@ -61,7 +67,10 @@ const getAllSchools = async (request, response) => {
       "data": res.rows
     })
   } catch (err) {
-    console.log(err.stack)
+    return response.json({
+      "status":500,
+      "message":"Internal Server Error"
+    })
   }
 }
 
@@ -79,7 +88,10 @@ const createCondition = async (request, response) => {
       })
       
     } catch (err) {
-      console.log(err.stack)
+      return response.json({
+        "status":500,
+        "message":"Internal Server Error"
+      })
     }
 }
 
@@ -92,7 +104,10 @@ try{
     "data": res.rows
   })
 } catch (err) {
-  console.log(err.stack)
+  return response.json({
+    "status":500,
+    "message":"Internal Server Error"
+  })
 }
 }
 
@@ -110,7 +125,10 @@ const createPatient = async (request, response) => {
       })
       
     } catch (err) {
-      console.log(err.stack)
+      return response.json({
+        "status":500,
+        "message":"Internal Server Error"
+      })
     }
 }
 
@@ -123,7 +141,10 @@ const getAllPatients = async (request, response) => {
       "data": res.rows
     })
   } catch (err) {
-    console.log(err.stack)
+    return response.json({
+      "status":500,
+      "message":"Internal Server Error"
+    })
   }
 }
 
