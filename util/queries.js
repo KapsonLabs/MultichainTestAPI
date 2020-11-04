@@ -20,6 +20,10 @@ const getIndividualSchool = 'SELECT * FROM schools WHERE center_no = $1'
 const createPatientQuery = 'INSERT INTO patients(fname, lname, nin, nin_hash, gender, dob, date_added) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *'
 
 const getPatientsQuery = 'SELECT * FROM patients'
+
+const createCasesQuery = 'INSERT INTO cases(cases_school_id, cases_patient_id, cases_condition_id, report_date) VALUES($1, $2, $3, $4) RETURNING *'
+
+const getCasesQueryPatient = 'SELECT * FROM cases WHERE cases_patient_id  = $1'
  
 module.exports={
   pool, 
@@ -29,5 +33,7 @@ module.exports={
   getConditionsQuery,
   getIndividualSchool,
   createPatientQuery,
-  getPatientsQuery
+  getPatientsQuery,
+  createCasesQuery,
+  getCasesQueryPatient
 }
