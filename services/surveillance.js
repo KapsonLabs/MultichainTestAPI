@@ -5,36 +5,38 @@ const {pool,
         getConditionsQuery,
         getIndividualSchool,
         createPatientQuery,
-        getPatientsQuery
+        getPatientsQuery,
+        createCasesQuery
       } = require("../util/queries");
 const {assignJwtToken} = require("../util/validators")
 const { response } = require("express");
 
-const authenticateSchool = async (request, response) => {
+const authenticateSchool = async (err, request, response) => {
+  
   await pool.connect()
-  const {center_no} = request.body
 
-  try{
-    const res = await pool.query(getIndividualSchool, [center_no])
-    if(res.rowCount==0){
+  const {center_no} = request.body
+    try{
+      const res = await pool.query(getIndividualSchool, [center_no])
+      if(res.rowCount==0){
+        return response.json({
+          "status":400,
+          "message":"school not found"
+        })
+      }else{
+        const token = await assignJwtToken(center_no)
+        return response.json({
+          "status":200,
+          "token":token,
+          "data":res.rows[0]
+        })
+      }
+    } catch (err) {
       return response.json({
-        "status":400,
-        "message":"school not found"
-      })
-    }else{
-      const token = await assignJwtToken(center_no)
-      return response.json({
-        "status":200,
-        "token":token,
-        "data":res.rows[0]
+        "status":500,
+        "message":"Internal Server Error"
       })
     }
-  } catch (err) {
-    return response.json({
-      "status":500,
-      "message":"Internal Server Error"
-    })
-  }
 }
 
 const createSchool = async (request, response) => {
@@ -148,6 +150,32 @@ const getAllPatients = async (request, response) => {
   }
 }
 
+const createCase = async (request, response) => {
+  await pool.connect()
+  const {school_id, patient_id, conditions} = request.body
+  let now = new Date();
+  
+  Object.keys(conditions).map(function(key, index) {
+    
+    const values = [school_id, patient_id, conditions[key], now]
+    try {
+      pool.query(createCasesQuery, values).then(
+        console.log(res)
+      )
+      
+    } catch (err) {
+      return response.json({
+        "status":500,
+        "message":"Internal Server Error"
+      })
+    }
+  })
+  return response.json({
+    "status": 201,
+    "data": conditions
+  })
+}
+
 module.exports = {
   createSchool, 
   getAllSchools, 
@@ -155,5 +183,6 @@ module.exports = {
   getAllConditions,
   authenticateSchool,
   createPatient,
-  getAllPatients
+  getAllPatients,
+  createCase
 }

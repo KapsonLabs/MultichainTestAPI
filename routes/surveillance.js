@@ -8,7 +8,8 @@ const {
     getAllConditions,
     authenticateSchool,
     createPatient,
-    getAllPatients
+    getAllPatients,
+    createCase
     } = require("../services/surveillance");
 
 router.post("/authenticate", authenticateSchool)
@@ -18,6 +19,7 @@ router.post("/conditions", validJWTNeeded, createCondition)
 router.get("/conditions", validJWTNeeded, getAllConditions)
 router.post("/patients", validJWTNeeded, createPatient)
 router.get("/patients", validJWTNeeded, getAllPatients)
+router.post("/cases", createCase)
 
 
 module.exports = router;

@@ -37,7 +37,16 @@ const assignJwtToken = async (centerNo) => {
     )
 }
 
+const handleJsonError = (err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).send({ code: 400, message: "bad request" })
+  }else{
+    return next()
+  }
+}
+
 module.exports={
     validJWTNeeded,
-    assignJwtToken
+    assignJwtToken,
+    handleJsonError
 }
