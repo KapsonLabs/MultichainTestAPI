@@ -18,4 +18,8 @@ const User  = sequelize.define('user', {
     }
 });
 
+// const Uploads = sequelize.define('user', {
+
+// })
+
 module.exports = {User}
