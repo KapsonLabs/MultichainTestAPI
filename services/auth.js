@@ -3,6 +3,8 @@ const { request, response } = require('express');
 const jwt = require("jsonwebtoken")
 const {generateOtp, dispatchOtp} = require('../util/dispatch-otp');
 const {config} = require("../config")
+const fs = require("fs")
+
 
 const addUser = async (phoneNumber, otp, firstName, lastName) => {
     return await User.create({
@@ -86,4 +88,15 @@ const authenticateUser = async(request, response) => {
     })
 }
 
-module.exports = {addUser, getUsers, getSpecificUser, authenticateUser}
+const uploadFiles = async (request, response) => {
+    var img = fs.readFileSync(request.file.path);
+    var encode_image = img.toString('base64');
+  
+    var finalImg = {
+        contentType: request.file.mimetype,
+        image:  new Buffer(encode_image, 'base64')
+    };
+    console.log(finalImg)
+}
+
+module.exports = {addUser, getUsers, getSpecificUser, authenticateUser, uploadFiles}
